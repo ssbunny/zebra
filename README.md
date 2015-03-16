@@ -34,12 +34,14 @@ z.Run()
 ## 路由
 zebra的路由是满足 RESTful 规则的路由，但需要注意的是，它并不支持完整的HTTP Method,
 我们只保留了一些常用的方法，如下：
+
     "GET"
     "POST"
     "PUT"
     "OPTIONS"
     "DELETE"
     "HEAD"
+
 我们相信这些方法足够您实现一个完整的 RESTful Web 服务。但是如果它们真的不足以满足您的需求，
 不要担心，zebra的路由中间件非常容易扩展。
 
@@ -62,12 +64,13 @@ zebra的路由规则非常简单，使用它时你只需要记住一个能满足
 ``````go
 // http GET:  localhost:8888/user/zhangsan
 r.Get("/user/:name", func(c *zebra.Captain) {
-    // 使用 c.Path("name") 得到请求的中的路径参数 'zhangsan'
+    // 使用 c.Path("name") 得到请求中的路径参数 'zhangsan'
 })
 ``````
 
-这种方式能解决绝大多数路由规则需求，但并不是万能的。你总会遇到一些特殊的匹配规则，
-此时，只需要编写自己的正则规则即可。zebra路由直接支持正则表达式：
+我们在实践中发现，这种方式能解决绝大多数路由规则需求，但并不是万能的。
+你总会遇到一些特殊的匹配规则，此时，只需要编写自己的正则即可。
+zebra路由直接支持正则表达式，只需要将它放在一对花括号中：
 
 ``````go
 // http GET:  localhost:8888/bar/badman123
@@ -112,3 +115,7 @@ app := zebra.New()
 app.Use(subApp)
 app.Run()
 ``````
+
+## 联系我们
+有问题可以直接创建一个issue
+PS: zebra目前处于开发阶段，欢迎有同样想法的朋友加入。
