@@ -1,14 +1,14 @@
-# zebra
+# zebra - 一个黑白分明的 Go Web 框架
 
 ![zebra](logo.png)
 
-zebra 是一个追求简单实用，但同时功能特性完整、易扩展、编码灵活自由的Golang Web框架。
+zebra 是一个追求简单实用，但同时功能特性完整、易扩展、编码灵活自由的 Golang Web 框架。
 它不依赖任何第三方包。
 
 
 ## 如何使用
 
-使用zebra只需要创建一个zebra服务并启动它：
+使用 zebra 只需要创建一个 zebra 服务并启动它：
 
 ``````go
 z := zebra.New()
@@ -116,6 +116,10 @@ app.Use(subApp)
 app.Run()
 ``````
 
+
+
 ## 联系我们
+
 有问题可以直接创建一个issue
+
 PS: zebra目前处于开发阶段，欢迎有同样想法的朋友加入。

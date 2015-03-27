@@ -151,13 +151,13 @@ func (c *Captain) Path(pathname string) string {
 }
 
 func (c *Captain) write(cxt *Context) {
-	res := cxt.OriginalResponseWriter()
+	res := cxt.ResponseWriter()
 	res.Header().Set("Content-Type", c.mimeType)
 	res.Header().Set("X-Powered-By", "Zebra")
 	if c.status == 0 {
 		c.status = http.StatusOK
 	}
-	res.WriteHeader(c.status)
+	//res.WriteHeader(c.status)
 	res.Write(c.output)
 }
 
@@ -179,8 +179,4 @@ func (e *exporter) WriteJSON(data interface{}) {
 	}
 	e.output = result
 	e.mimeType = "application/json"
-}
-
-func FullFeatures(zebra *Zebra) {
-	zebra.Use(ServeFavicon("./favicon.ico"))
 }
