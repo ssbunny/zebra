@@ -5,6 +5,11 @@
 zebra 是一个追求简单实用，但同时功能特性完整、易扩展、编码灵活自由的 Golang Web 框架。
 它不依赖任何第三方包。
 
+* [新手入门]()
+* [用户指南](wiki/用户指南)
+* [使用手册]()
+
+
 
 ## 如何使用
 
@@ -80,7 +85,30 @@ r.Get("/bar/:userName{badman[\\d]+}", func(c *Captain) {
 // 请求 localhost:8888/bar/goodboy1314 则不会被匹配
 ``````
 
+
+
 ## 日志
+
+创建日志模块并注册，即可记录 zebra 的访问日志：
+
+``````go
+logger := NewLogger()
+app.Use(r)
+``````
+
+zebra 提供两种内置的日志格式：`common` 和 `combined`. 默认使用 `combined` 格式，它会记录类似
+apache http combined 格式的日志。
+
+使用 `SetFormat(string)` 方法设置日志格式，如 `logger.SetFormat("common")`。
+也可以使用自定义格式，如：
+
+``````go
+logger := zebra.NewLogger()
+logger.SetFormat("[:date] :method :url HTTP/:http-version (:response-time)")
+``````
+
+
+
 
 ## favicon
 

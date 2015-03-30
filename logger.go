@@ -21,7 +21,6 @@ var tokenReg = regexp.MustCompile(`:([-\w]{2,})(?:\[([^\]]+)\])?`)
 // 服务访问日志
 type AccessLogger struct {
 	format    string
-	output    string
 	logger    *log.Logger
 	immediate bool
 }
@@ -53,10 +52,10 @@ func (logger *AccessLogger) Callback(cxt *Context) {
 
 func (logger *AccessLogger) parse(cxt *Context) string {
 	return tokenReg.ReplaceAllStringFunc(logger.format, func(m string) string {
-		if strings.HasPrefix(m, ":req") {
+		if strings.HasPrefix(m, ":req[") {
 			return cxt.Request().Header.Get(plainToken(m))
 		}
-		if strings.HasPrefix(m, ":res") {
+		if strings.HasPrefix(m, ":res[") {
 			// TODO 一定程度上讲，在Handler里几乎不可能得到太多有用的 response header
 			// 大多数头信息是在 ServeHTTP 之后计算得到，日志组件的生命周期无法渗透其中
 			// 如果zebra定义于一个完整的Server而非Handler则显得过于庞杂
